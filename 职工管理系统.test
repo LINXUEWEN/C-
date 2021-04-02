@@ -1,0 +1,66 @@
+#include "system.h"
+
+
+//void test1()
+{
+	Worker *worker = NULL;
+	worker = new Employee("张三", 1, 1);
+	worker->show_info();
+	delete worker;
+
+	worker = new Manager("里斯", 2, 2);
+	worker->show_info();
+	delete worker;
+
+	worker = new Boss("里斯", 3, 3);
+	worker->show_info();
+	delete worker;
+}
+
+int main()
+{
+	//test1();
+	Work_manager wm;
+	int choice = 0;
+	while (1)
+	{
+		wm.Show_menu();
+		cout << "请选择：>" << endl;
+		cin >> choice;
+		switch (choice)
+		{
+		case EXIT:
+			wm.Exit_system();
+			break;
+		case ADD:
+			wm.add_emp();
+			break;
+		case DISPLAY:
+			wm.Show_emp();
+			break;
+		case DELETE:
+			wm.Del_emp();
+			break;
+		case MOD:
+			wm.Mod_emp();
+			break;
+		case FIND:
+			wm.find_emp();
+			break;
+		case SORT:
+			wm.sort_emp();
+			break;
+		case CLEAR:
+			wm.clear_emp();
+			break;
+		default:
+			cout << "请输入合法数字!!!!" << endl;
+			system("pause");
+			system("cls");
+			break;
+		}
+	}
+
+	system("pause");
+	return 0;
+}
