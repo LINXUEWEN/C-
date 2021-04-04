@@ -1,0 +1,90 @@
+#include "myArray.hpp"
+
+void test01()
+{
+	myArray<int>arr1(5);
+
+	myArray<int>arr2(arr1);
+
+	myArray<int>arr3 (100);
+	arr3 = arr1;
+}
+
+void print_array(myArray<int> &arr)
+{
+	for (int i = 0; i < arr.get_size(); i++)
+	{
+		cout << arr[i] << " ";
+	}
+	cout << endl;
+}
+
+void test02()
+{
+	myArray<int>arr1(5);
+	for (int i = 0; i < 5; i++)
+	{
+		arr1.push_back(i);
+	}
+	cout << "arr1的打印输出: " << endl;
+	print_array(arr1);
+	cout << arr1.get_capacity() << endl << endl;
+
+	myArray<int>arr2(arr1);
+	arr2.pop_back();
+	print_array(arr2);
+	cout << arr2.get_size() << endl;
+	cout << arr2.get_capacity() << endl << endl;
+}
+
+class Person
+{
+public:
+	Person(){
+		//cout << "Person无参构造函数调用" << endl;//在myArray中的pAddress开辟空间时，就要调用Person，进行构造，这里的函数是无参的，需要有一个无参构造函数
+	};//要有这个构造函数
+	Person(string name, int age)
+	{
+		//cout << "Person有参构造函数调用" << endl;
+		this->m_name = name;
+		this->m_age = age;
+	}
+
+	string m_name;
+	int m_age;
+};
+
+void print_personarr(myArray<Person>& arr)
+{
+	for (int i = 0; i < arr.get_size(); i++)
+	{
+		cout << "name= " << arr[i].m_name << " age= " << arr[i].m_age << endl;
+	}
+}
+
+void test03()
+{
+	myArray<Person> arr(10);
+	Person p1("章子俊", 20);
+	Person p2("魏冉", 21);
+	Person p3("伞兵", 10);
+	Person p4("傻逼", 2);
+
+	arr.push_back(p1);
+	arr.push_back(p2); 
+	arr.push_back(p3);
+	arr.push_back(p4);
+
+	print_personarr(arr);
+
+	cout << arr.get_size() << endl;
+	cout << arr.get_capacity() << endl << endl;
+}
+
+int main()
+{
+	test03();
+
+	system("pause");
+	return 0;
+}
