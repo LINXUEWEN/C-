@@ -1,0 +1,85 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <map>
+#include <ctime>
+using namespace std;
+
+class Worker
+{
+public:
+	string m_name;
+	int m_salary;
+};
+
+void creatWorker(vector<Worker>& vWorker)
+{
+	string nameSeed = "ABCDEFGHIJ";
+	for (int i = 0; i < 10; i++)
+	{
+		Worker worker;
+		worker.m_name = "员工";
+		worker.m_name += nameSeed[i];
+
+		worker.m_salary = rand() % 10001 + 10000;
+
+		vWorker.push_back(worker);
+	}
+}
+
+void setGroup(vector<Worker>& vWorker, multimap<int, Worker> &mWorker)
+{
+	for (vector<Worker>::iterator it = vWorker.begin(); it != vWorker.end(); it++)
+	{
+		int deptID = rand() % 3;
+		mWorker.insert(make_pair(deptID, *it));
+	}
+}
+
+void printWorkerByGroup(int i, const multimap<int, Worker>& mWorker)
+{
+	multimap<int, Worker>::const_iterator pos = mWorker.find(i);
+	int count = mWorker.count(i);
+	int index = 0;
+	for (; pos != mWorker.end() && index < count; pos++, index++)
+	{
+		cout << "name= " << pos->second.m_name << "  salary=" << pos->second.m_salary << endl;
+	}
+	cout << "-----------------------------------------" << endl;
+}
+
+void showWorkerByGroup(multimap<int, Worker>& mWorker)
+{
+	cout << "策划部门：" << endl;
+	printWorkerByGroup(0, mWorker);
+
+	cout << "美术部门：" << endl;
+	printWorkerByGroup(1, mWorker);
+
+	cout << "管理部门：" << endl;
+	printWorkerByGroup(2, mWorker);
+}
+
+void test()
+{
+	srand((unsigned int)time(NULL));
+	vector<Worker> vWorker;
+	creatWorker(vWorker);
+	/*for (vector<Worker>::iterator it = vWorker.begin(); it != vWorker.end(); it++)
+	{
+		cout << "name= " << it->m_name << "  salary=" << it->m_salary << endl;
+	}
+	cout << endl;*/
+	
+	multimap<int, Worker> mWorker;
+	setGroup(vWorker, mWorker);
+
+	showWorkerByGroup(mWorker);
+}
+
+int main()
+{
+	test();
+	system("pause");
+	return 0;
+}
