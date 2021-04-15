@@ -1,0 +1,42 @@
+#include"speech.h"
+
+int main()
+{
+	SpeechManager sm;
+	/*for (map<int, Speaker>::iterator it = sm.m_speaker.begin(); it != sm.m_speaker.end(); it++)
+	{
+		cout << "编号： " << it->first
+			<< "\t姓名： " << it->second.m_name
+			<< "\t成绩： " << it->second.m_score[0] << endl;
+	}*/
+	int choice = 0;
+	do{
+		sm.showMenu();
+		cout << "请输入：> " << endl;
+		cin >> choice;
+
+		switch (choice)
+		{
+		case START:
+			sm.startSpeech();
+			break;
+		case SHOW:
+			sm.showRecord();
+			break;
+		case CLEAR:
+			sm.clearRecord();
+			break;
+		case EXIT:
+			sm.exitSystem();
+			break;
+		default:
+			cout << "请输入合法字符！！" << endl;
+			system("pause");
+			system("cls");
+			break;
+		}
+	} while (choice);
+
+	system("pause");
+	return 0;
+}
