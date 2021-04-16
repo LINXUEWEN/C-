@@ -1,0 +1,49 @@
+#include "System.h"
+
+void Menu()
+{
+	cout << "================   欢迎使用机房预约系统   ================" << endl;
+	cout << endl << "请输入您的身份" << endl;
+	cout << "\t\t--------------------------" << endl;
+	cout << "\t\t|                        |" << endl;
+	cout << "\t\t|   1.    学生           |" << endl;
+	cout << "\t\t|   2.    老师           |" << endl;
+	cout << "\t\t|   3.   管理员          |" << endl;
+	cout << "\t\t|   0.    退出           |" << endl;
+	cout << "\t\t|                        |" << endl;
+	cout << "\t\t--------------------------" << endl;
+	cout << "请输入您的选择：> ";
+}
+
+int main()
+{
+	int select = 0;
+	do
+	{
+		Menu();
+		cin >> select;
+		switch (select)
+		{
+		case STUDENT:
+			LoginIn(STUDENT_FILE, STUDENT);
+			break;
+		case TEACHER:
+			LoginIn(TEACHER_FILE, TEACHER);
+			break;
+		case MANAGER:
+			LoginIn(ADMIN_FILE, MANAGER);
+			break;
+		case EXIT:
+			cout << "欢迎下次使用！" << endl;
+			break;
+		default:
+			cout << "请输入合法字符" << endl;
+			system("pause");
+			system("cls");
+			break;
+		}
+	} while (select);
+
+	system("pause");
+	return 0;
+}
